@@ -171,17 +171,24 @@ function checkEmail()
         noerror('email');
         return;
     }
-    let errorfound=false;
+
     let arrEmail=val.split('@');
     if(arrEmail.length!=2||val.includes(' ')||arrEmail.includes(''))
     {
-        errorfound=true;
+        showError('Invalid Email','email');
+           return;
 
     }
     else
     { 
         let firstPart=arrEmail[0].toLowerCase();
-        console.log(firstPart)
+        let temporary=firstPart.split('.');
+        if(temporary.includes(''))
+        {
+            showError('Invalid Email','email');
+            return ;
+
+        }
 
         const digits=['0','1','2','3','4','5','6','7','8','9'];
 
@@ -189,21 +196,21 @@ function checkEmail()
         {
                 let ch=firstPart.at(i);
 
-
-                if((ch<'a'||ch>'z')&& !digits.includes(ch))
+                if((ch<'a'||ch>'z')&& !digits.includes(ch)&&ch!='.')
                 {
-                    console.log(ch);
-                    errorfound=true;     
-                    break;
+                    showError('Invalid Email','email');
+                    return ;
                 }
 
         }
 
         let secondEmailPart=arrEmail[1].toLowerCase();
         let temp=secondEmailPart.split('.');
+
         if(temp.length==1||temp.includes(''))
         {
-            errorfound=true;
+            showError('Invalid Email','email');
+            return ;
     
         }
         else
@@ -212,8 +219,8 @@ function checkEmail()
              {
                 if((secondEmailPart.charCodeAt(i)<97||secondEmailPart.charCodeAt(i)>122)&&secondEmailPart.at(i)!='.')
                 {
-                    errorfound=true;
-                     break;
+                    showError('Invalid Email','email');
+                    return ;
                 }
 
              }
@@ -224,9 +231,6 @@ function checkEmail()
     }
 
     
-    if(errorfound)
-    showError('Invalid Email','email');
-    else
     noerror('email');
 }
 
