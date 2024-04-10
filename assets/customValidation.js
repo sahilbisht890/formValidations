@@ -4,13 +4,13 @@ function formSubmit() {
     event.preventDefault();
     let form = document.getElementById("login-form");
     let info = {
-        'username': form.elements.username.value,
-        'phone': form.elements.phone.value,
-        'email': form.elements.email.value,
-        'pincode': form.elements.pincode.value,
-        'address': form.elements.address.value,
-        'age': form.elements.age.value,
-        'gender': form.elements.gender.value,
+        'Full Name': form.elements.username.value,
+        'Age': form.elements.age.value,
+        'Gender': form.elements.gender.value,
+        'Phone': form.elements.phone.value,
+        'Email': form.elements.email.value,
+        'Pincode': form.elements.pincode.value,
+        'Address': form.elements.address.value
     };
 
     let temp = form.elements.password.value;
@@ -18,7 +18,7 @@ function formSubmit() {
     let l=temp.length;
 
 
-    info['password'] = star.padStart(l-3,'*')+temp.slice(-3);
+    info['Password'] = star.padStart(l-3,'*')+temp.slice(-3);
     let moveForward = true;
     for (let i in errors) {
         if (errors[i]) {
@@ -33,7 +33,7 @@ function formSubmit() {
             localStorage.setItem('formData', JSON.stringify(info));
 
             window.location.href = "formData.html";
-        }, 2000);
+        }, 1000);
         form.reset();
     }
     return false;
@@ -49,6 +49,7 @@ function fetchValue(id)
 function showError(msg,id)
 {
   document.querySelector('.error'+id).innerHTML=msg;  
+  document.getElementById(id).style.border='1px solid red';
   errors[id]=true;  
 
 }
@@ -57,12 +58,15 @@ function noerror(id)
 {
     document.querySelector('.error'+id).innerHTML='';   
     errors[id]=false;  
+    document.getElementById(id).style.border='none';
+
  
 }
 
 function checkname()
 {
     let val=fetchValue("username");
+    val=val.trimEnd();
     let fullname=val.split(' ');
 
     if(val.length>0 && fullname.includes(''))
@@ -88,6 +92,8 @@ function checkname()
 function checkPhone()
 {
     let val=fetchValue("phone");
+    val=val.trimEnd();
+
     if(val.length==0)
     {
 
@@ -123,6 +129,8 @@ function checkPhone()
 function checkPincode()
 {
     let val=fetchValue("pincode");
+    val=val.trimEnd();
+
     if(val.length==0)
     {
 
@@ -156,6 +164,8 @@ function checkPincode()
 function checkEmail()
 {
     let val=fetchValue("email");
+    val=val.trimEnd();
+
     if(val.length==0)
     {
         noerror('email');
@@ -204,6 +214,8 @@ function checkEmail()
 function checkPassword()
 {
     let val=fetchValue("password");
+    val=val.trimEnd();
+
     if(val.length==0)
     {
         noerror('password');
