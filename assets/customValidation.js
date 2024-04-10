@@ -173,16 +173,35 @@ function checkEmail()
     }
     let errorfound=false;
     let arrEmail=val.split('@');
-    if(arrEmail.length!=2||val.includes(' '))
+    if(arrEmail.length!=2||val.includes(' ')||arrEmail.includes(''))
     {
         errorfound=true;
 
     }
     else
     { 
+        let firstPart=arrEmail[0].toLowerCase();
+        console.log(firstPart)
+
+        const digits=['0','1','2','3','4','5','6','7','8','9'];
+
+        for(let i in firstPart)
+        {
+                let ch=firstPart.at(i);
+
+
+                if((ch<'a'||ch>'z')&& !digits.includes(ch))
+                {
+                    console.log(ch);
+                    errorfound=true;     
+                    break;
+                }
+
+        }
+
         let secondEmailPart=arrEmail[1].toLowerCase();
         let temp=secondEmailPart.split('.');
-        if(temp.length!=2||temp.includes(''))
+        if(temp.length==1||temp.includes(''))
         {
             errorfound=true;
     
