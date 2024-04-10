@@ -164,7 +164,7 @@ function checkPincode()
 function checkEmail()
 {
     let val=fetchValue("email");
-    val=val.trimEnd();
+    
 
     if(val.length==0)
     {
@@ -182,7 +182,7 @@ function checkEmail()
     { 
         let secondEmailPart=arrEmail[1].toLowerCase();
         let temp=secondEmailPart.split('.');
-        if(temp.length!=2)
+        if(temp.length!=2||temp.includes(''))
         {
             errorfound=true;
     
