@@ -182,7 +182,7 @@ function checkEmail()
     { 
         let secondEmailPart=arrEmail[1].toLowerCase();
         let temp=secondEmailPart.split('.');
-        if(arrEmail.length!=2)
+        if(temp.length!=2)
         {
             errorfound=true;
     
